@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<title>CRUD php sql</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<body>
+<pre>
+$conn=new PDO('mysql:host=localhost;dbname=tutorial','root','');
+if(isset($_GET['del'])){
+	$conn->query("delete from produtos where id=".$_GET['del']);
+	echo "&lt;div style='background-color:#aa0000; color:#ffffff; font-weight:bold; padding:16px; text-align:center;'>produto excluído da base de dados&lt;/div>&lt;br>\n";
+}
+</pre>
+</body>

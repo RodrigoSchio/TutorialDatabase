@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<title>CRUD php sql</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<body>
+<pre>
+echo "&lt;/table>\n";
+echo "&lt;/form>\n";
+$stmt=$conn->query("select id,nome from produtos");
+if($stmt->rowCount()){
+	echo "&lt;br>&lt;br>&lt;table align=center style='background-color:#ffffff; padding:8px;'>\n";
+	while($row=$stmt->fetch())echo "&lt;tr>&lt;td>".$row['id']."&lt;/td>&lt;td>".$row['nome']."&lt;/td>&lt;td>&lt;button onclick=\"location.href='index.php?id=".$row['id']."';\">Editar&lt;/button> &lt;button onclick=\"if(confirm('Tem Certeza ?'))location.href='index.php?del=".$row['id']."';\">Excluir&lt;/button>&lt;/td>&lt;/tr>";
+	echo "&lt;/table>\n";
+}
+?>
+&lt;br>&lt;br>&lt;br>
+</pre>
+</body>

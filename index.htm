@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<title>CRUD php sql</title>
+<meta name=google-site-verification content=CZL0Nc0-F_4InA1pEuOmajEUgi9uhT0zB2nBziiiFqg>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<style>
+h1{background-color:#2a5aaa; color:#ffffff; padding:20px; margin:-20px -12px 10px -12px;}
+h3{background-color:#88bb99; color:#333333; padding:12px; margin:10px -12px 10px -12px;}
+.imagem{max-width:100%; cursor:pointer; border:4px double #777777;}
+</style>
+</head>
+<body style="margin:30px; font-family:'Segoe Ui';">
+<h1>CRUD php sql</h1>
+
+<h3>Escrever código</h3>
+O intuito desse tutorial é apresentar o php e mysql que são softwares baseados em código digitado.<br>
+Para seguir esse tutorial são necessárias muitas ações além de escrever código, mas o <b>principal</b> é o ato de codar.<br><br>
+<li><b>C</b> - Create (armazenar no banco de dados)</li>
+<li><b>R</b> - Read (acessar registros na base de dados)</li>
+<li><b>U</b> - Update (alterar registro)</li>
+<li><b>D</b> - Delete (excluir registro)</li><br>
+<b>php</b> - Linguagem de programação de servidores<br><br>
+<b>sql</b> - Linguagem de bancos de dados
+<h3>Instalar o Notepad++</h3>
+Pode ser o VSCode ou qualquer outro software de editar código.<br><br>
+<img class=imagem src=imagens/1.png onclick="window.open(this.src,'_blank');">
+
+<h3>Instalar o Xampp</h3>
+O Xampp é um software que emula um webserver.<br>
+Ele instala o php e o mysql.<br><br>
+<img class=imagem src=imagens/2.png onclick="window.open(this.src,'_blank');">
+
+<h3>Criar um arquivo html</h3>
+Crie um arquivo chamado index.htm<br>
+É importante entender que esse tipo de arquivo contém um tipo de código que é ao mesmo tempo entendível por seres humanos e renderizável pelos computadores.<br><br>
+
+Escreva "hello world" nesse arquivo.<br>
+Salve e 'execute pelo browser'.<br><br>
+
+Perceba que são duas maneiras diferentes de lidar com o mesmo arquivo.<br><br>
+
+<h3>O Xampp emula um websever</h3>
+Um webserver tradicional é um computador como outro qualquer, só que ele fica conectado a internet 24hs por dia.<br>
+Quando outro computador acessa o webserver ele envia arquivos.<br>
+Basicamente ele fica ligado o tempo todo esperando uma 'requisição'.<br>
+Quando ocorre uma requisição ele envia uma resposta.<br><br>
+<img class=imagem src=imagens/3.png onclick="window.open(this.src,'_blank');"><br><br>
+
+O Xampp emula um webserver.<br>
+No painel de controle do Xampp é possível startar o apache.<br>
+O apache é o php.<br>
+Ele serve para que o programador escreva instruções para o sever executar quando ele receber a requisição.<br><br>
+
+Exemplo: Quando o user envia uma requisição para o server, ele pode armazenar algo no banco de dados.<br><br>
+
+O mysql também fica apenas experando para ser acionado.<br>
+A diferença é que quem acessa o mysql é o proprio php.<br><br>
+
+O php recebe a requisição, depois ele busca a informação no banco de dados e depois ele devolve a resposta para o usuário.<br><br>
+
+<h3>php / htdocs / localhost</h3>
+É preciso que os arquivos estejam dentro da pasta xampp/htdocs/<br><br>
+
+Quando o apache recebe a requisição ele procura na pasta xampp/htdocs/ qual arquivo php deve ser executado.<br><br>
+
+Para começar vamos criar um arquivo chamado 'index.php' na pasta xampp\htdocs\produtos<br><br>
+
+O conteúdo desse arquivo:<br><br>
+<img class=imagem src=imagens/6.png onclick="window.open('parciais/1.htm','_blank');"><br><br>
+
+Para acessar pelo browser basta digitar localhost/produtos<br>
+(é preciso que o php esteja startado no xampp)<br><br>
+<img class=imagem src=imagens/4.png onclick="window.open(this.src,'_blank');"><br><br>
+
+<h3>Código html (Cadastro de produtos)</h3>
+Para começar a fazer o cadastro do produto podemos utilizar o seguinte código:<br><br>
+<img class=imagem src=imagens/7.png onclick="window.open('parciais/2.htm','_blank');"><br><br>
+<img class=imagem src=imagens/5.png onclick="window.open(this.src,'_blank');"><br><br>
+
+<h3>Create Table</h3>
+Vamos começar a lidar com a base de dados.<br>
+Para isso vamos usar o phpMyAdmin que vem instalado no Xampp.<br><br>
+<img class=imagem src=imagens/8.png onclick="window.open(this.src,'_blank');"><br><br>
+<img class=imagem src=imagens/9.png onclick="window.open(this.src,'_blank');"><br><br>
+É preciso criar uma nova base de dados.<br>
+Podemos dar o nome <b>tutorial</b>.<br><br>
+É preciso criar uma tabela chamada <b>produtos</b>.<br>
+Com os campos:<br>
+<li>id (int auto_increment)</li>
+<li>nome (varchar)</li>
+<li>descricao (varchar)</li>
+<li>imagem (varchar)</li>
+<li>preco (varchar)</li><br>
+É importante que o campo id seja <b>auto_increment</b>
+
+<h3>Comando Insert</h3>
+Vamos fazer com que a tela de cadastro envie os dados para o DB.<br><br>
+<img class=imagem src=imagens/10.png onclick="window.open('parciais/3.htm','_blank');">
+
+<h3>Lista de Produtos</h3>
+Abaixo do formulário podemos exibir a lista de produtos cadastrados.<br><br>
+<img class=imagem src=imagens/11.png onclick="window.open('parciais/4.htm','_blank');">
+
+<h3>Comando Delete</h3>
+<img class=imagem src=imagens/12.png onclick="window.open('parciais/5.htm','_blank');">
+
+<h3>Update</h3>
+Para implementar a alteração é preciso reescrever o formulário de cadastro para que ele busque os dados.<br><br>
+<img class=imagem src=imagens/13.png onclick="window.open('parciais/6.htm','_blank');"><br><br>
+<img class=imagem src=imagens/14.png onclick="window.open('parciais/6.htm','_blank');"><br><br>	
+</body>
+</html>

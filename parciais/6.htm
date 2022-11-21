@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<title>CRUD php sql</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<body>
+<pre>
+if(isset($_POST['nome'])){
+	if(isset($_GET['id'])){
+		$conn->query("update produtos set nome='".$_POST['nome']."',descricao='".$_POST['descricao']."',preco='".$_POST['preco']."' where id=".$_GET['id']);
+		if(isset($_FILES['arq'])&&($_FILES['arq']['tmp_name'])!=''){
+			@mkdir("imagens");
+			move_uploaded_file($_FILES['arq']['tmp_name'],"imagens/".$_GET['id']."_".$_FILES['arq']['name']);
+			$conn->query("update produtos set imagem='".$_GET['id']."_".$_FILES['arq']['name']."' where id=".$_GET['id']);
+		}
+		echo "&lt;div style='background-color:#aa0000; color:#ffffff; font-weight:bold; padding:16px; text-align:center;'>os dados do produto foram alterados&lt;/div>&lt;br>\n";
+	}
+	else{
+		$conn->query("insert into produtos(nome,descricao,preco) values('".$_POST['nome']."','".$_POST['descricao']."','".$_POST['preco']."')");
+		if(isset($_FILES['arq'])&&($_FILES['arq']['tmp_name'])!=''){
+			@mkdir("imagens");
+			$inserido=$conn->lastInsertId();
+			move_uploaded_file($_FILES['arq']['tmp_name'],"imagens/".$inserido."_".$_FILES['arq']['name']);
+			$conn->query("update produtos set imagem='".$inserido."_".$_FILES['arq']['name']."' where id=".$inserido);
+		}
+		echo "&lt;div style='background-color:#aa0000; color:#ffffff; font-weight:bold; padding:16px; text-align:center;'>produto inserido na base de dados&lt;/div>&lt;br>\n";
+	}
+}
+if(isset($_GET['id'])){
+	$stmt=$conn->query("select * from produtos where id=".$_GET['id']);
+	$row=$stmt->fetch();
+	if(is_file("imagens/".$row['imagem']))echo "&lt;center>&lt;img src='imagens/".$row['imagem']."' style='max-width:300px;'>&lt;/center>&lt;br>\n";
+	echo "&lt;form action=index.php?id=".$_GET['id']." method=post enctype=multipart/form-data>\n";
+	echo "&lt;table align=center style='background-color:#ffffff; padding:8px;'>\n";
+	echo "&lt;tr>&lt;th style='background-color:#88bb99; color:#333333; padding:10px;' colspan=2>Alterar dados do Produto&lt;/th>&lt;/tr>\n";
+}
+else{
+	$row['nome']=$row['descricao']=$row['preco']="";
+	echo "&lt;form action=index.php method=post enctype=multipart/form-data>\n";
+	echo "&lt;table align=center style='background-color:#ffffff; padding:8px;'>\n";
+	echo "&lt;tr>&lt;th style='background-color:#88bb99; color:#333333; padding:10px;' colspan=2>Cadastro de Produto&lt;/th>&lt;/tr>\n";
+}
+echo "&lt;tr>&lt;td>Nome&lt;/td>&lt;td>&lt;input name=nome value='".$row['nome']."'>&lt;/td>&lt;/tr>\n";
+echo "&lt;tr>&lt;td>Descrição&lt;/td>&lt;td>&lt;textarea style='width:240px; height:66px;' name=descricao>".$row['descricao']."&lt;/textarea>&lt;/td>&lt;/tr>\n";
+echo "&lt;tr>&lt;td>Imagem&lt;/td>&lt;td>&lt;input name=arq type=file>&lt;/td>&lt;/tr>\n";
+echo "&lt;tr>&lt;td>Preço&lt;/td>&lt;td>&lt;input name=preco style='width:60px;' value='".$row['preco']."'>&lt;/td>&lt;/tr>\n";
+echo "&lt;tr>&lt;td colspan=2 align=right>";
+if(isset($_GET['id']))echo "&lt;input type=button value=Novo onclick=\"location.href='index.php';\"> ";
+echo "&lt;input type=submit value=Salvar>&lt;/td>&lt;/tr>\n";
+echo "&lt;/table>\n";
+echo "&lt;/form>\n";
+</pre>
+</body>
